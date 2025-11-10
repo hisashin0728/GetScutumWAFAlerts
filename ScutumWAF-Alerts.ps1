@@ -1,5 +1,5 @@
 # =========================
-# Scutum 防御ログ一覧 取得テンプレート
+# Scutum WAF アラート防御ログ一覧 取得テンプレート
 # =========================
 # PowerShell 7+ は既定 UTF-8 ですが、念のため明示
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -118,4 +118,5 @@ if ($allData.Count -gt 0) {
 } else {
     Write-Warning "取得データが0件でした"
 }
+
 
