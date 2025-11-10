@@ -14,7 +14,6 @@ $HostFqdn = "<YOUR_HOST_FQDN>"
 $BaseUrl = "https://api.scutum.jp/api/v1/alert"
 
 # 3) クエリ条件（開始・終了時刻、対象サイトID等）
-#    ISO8601（UTC）/ ローカル時刻 → UTC 変換のいずれか。サポートサイト仕様に合わせて。
 #$StartTime = (Get-Date).AddDays(-90).ToString("yyyy-MM-ddTHH:mm:ss")  # 例: 昨日から
 #$EndTime   = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")              # 例: 今まで
 
@@ -119,3 +118,4 @@ if ($allData.Count -gt 0) {
 } else {
     Write-Warning "取得データが0件でした"
 }
+
