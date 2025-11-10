@@ -1,22 +1,25 @@
 # =========================
-# Scutum 防御ログ一覧 取得スクリプト
+# Scutum 防御ログ一覧 取得テンプレート
 # =========================
 # PowerShell 7+ は既定 UTF-8 ですが、念のため明示
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 # Windows PowerShell (5.1) の場合はこれも設定
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
-$ApiKey = "<Your API Key>"
-$UserId = "<Your User Id>"
-$HostFqdn = "<Your Host FQDN>"
+$ApiKey = "<YOUR_API_KEY>"
+$UserId = "<YOUR_USER_ID>"
+$HostFqdn = "<YOUR_HOST_FQDN>"
 
-# 2) ベースURL（Scutum WAF Alert URL）
+# 2) ベースURL（サポートサイトの記載に合わせて調整）
 $BaseUrl = "https://api.scutum.jp/api/v1/alert"
 
 # 3) クエリ条件（開始・終了時刻、対象サイトID等）
 #    ISO8601（UTC）/ ローカル時刻 → UTC 変換のいずれか。サポートサイト仕様に合わせて。
-$StartTime = (Get-Date).AddDays(-90).ToString("yyyy-MM-ddTHH:mm:ss")  # 例: 昨日から
-$EndTime   = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")              # 例: 今まで
+#$StartTime = (Get-Date).AddDays(-90).ToString("yyyy-MM-ddTHH:mm:ss")  # 例: 昨日から
+#$EndTime   = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")              # 例: 今まで
+
+$StartTime = "2025-11-01T00:00:00+09:00" 
+$EndTime   = "2025-11-09T23:59:59+09:00"
 
 # 5) HTTP ヘッダー（APIキー認証）
 $Headers = @{
@@ -39,11 +42,17 @@ while ($truncated) {
     $loopCount++
     Write-Host "ループ ${loopCount} 回目の取得を開始..." -ForegroundColor Cyan
     
-    # クエリ文字列の生成
+    # クエリ文字列の生成（URLエンコード適用）
+    $encodedHost = [Uri]::EscapeDataString($HostFqdn)
+    $encodedUserId = [Uri]::EscapeDataString($UserId)
+    $encodedStartTime = [Uri]::EscapeDataString($StartTime)
+    $encodedEndTime = [Uri]::EscapeDataString($EndTime)
+    
     if ($null -ne $next_marker -and $next_marker -ne "") {
-        $qs = "host=$HostFqdn&id=$UserId&time_order=asc&from=$StartTime&to=$EndTime&marker=$next_marker"
+        $encodedMarker = [Uri]::EscapeDataString($next_marker)
+        $qs = "host=$encodedHost&id=$encodedUserId&time_order=asc&from=$encodedStartTime&to=$encodedEndTime&marker=$encodedMarker"
     } else {
-        $qs = "host=$HostFqdn&id=$UserId&time_order=asc&from=$StartTime&to=$EndTime"
+        $qs = "host=$encodedHost&id=$encodedUserId&time_order=asc&from=$encodedStartTime&to=$encodedEndTime"
     }
     $url = "$BaseUrl`?$qs"
 
