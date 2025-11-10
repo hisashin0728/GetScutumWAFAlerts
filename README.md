@@ -10,6 +10,7 @@
   - [Scutum WAF API 防御ログ詳細の取得](https://support.scutum.jp/manual/api/log-detail.html)
 
 # パラメータ
+>パラメータ設定は以下変更して下さい
 
 - スクリプト内のパラメータとして、``$ApiKey``, ``$UserId``, ``$HostFqdn`` を変数に用いています。
 
@@ -33,10 +34,11 @@ $EndTime   = "2025-11-09T23:59:59+09:00"
 ``` 
 
 # スクリプト
+>スクリプト本体はこちら
 
 - [ScutumWAF-Alerts.ps1](https://github.com/hisashin0728/GetScutumWAFAlerts/blob/main/ScutumWAF-Alerts.ps1)
 
 # 画面例
-
+>設定画面例
 <img width="971" height="283" alt="image" src="https://github.com/user-attachments/assets/854e004b-903d-4313-8781-de328aa11efe" />
 
