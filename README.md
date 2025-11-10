@@ -35,3 +35,8 @@ $EndTime   = "2025-11-09T23:59:59+09:00"
 # スクリプト
 
 - [ScutumWAF-Alerts.ps1](https://github.com/hisashin0728/GetScutumWAFAlerts/blob/main/ScutumWAF-Alerts.ps1)
+
+# 画面例
+
+<img width="971" height="283" alt="image" src="https://github.com/user-attachments/assets/854e004b-903d-4313-8781-de328aa11efe" />
+
