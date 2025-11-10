@@ -17,3 +17,7 @@ $ApiKey = "<Your API Key>"
 $UserId = "<Your User Id>"
 $HostFqdn = "<Your Host FQDN>"
 ```
+
+# スクリプト
+
+- [ScutumWAF-Alerts.ps1](https://github.com/hisashin0728/GetScutumWAFAlerts/blob/main/ScutumWAF-Alerts.ps1)
