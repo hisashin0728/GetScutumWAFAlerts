@@ -10,13 +10,27 @@
   - [Scutum WAF API 防御ログ詳細の取得](https://support.scutum.jp/manual/api/log-detail.html)
 
 # パラメータ
-スクリプト内のパラメータとして、``$ApiKey``, ``$UserId``, ``$HostFqdn`` を変数に用いています。
+
+- スクリプト内のパラメータとして、``$ApiKey``, ``$UserId``, ``$HostFqdn`` を変数に用いています。
 
 ```powershell
 $ApiKey = "<Your API Key>"
 $UserId = "<Your User Id>"
 $HostFqdn = "<Your Host FQDN>"
 ```
+
+- 取得時間は現在から過去日時の設定で作成しています。（以下例では現時点から過去三か月）
+
+```
+$StartTime = (Get-Date).AddDays(-90).ToString("yyyy-MM-ddTHH:mm:ss")  # 例: 昨日から
+$EndTime   = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")              # 例: 今まで
+```
+
+- 特定日時条件に合わせる場合は ISO 8601 形式で直接入れて下さい。
+```
+$StartTime = "2025-11-01T00:00:00+09:00" 
+$EndTime   = "2025-11-09T23:59:59+09:00"
+``` 
 
 # スクリプト
 
